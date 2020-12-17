@@ -45,7 +45,6 @@ const step = (neighboursFn, maxNeighbours) => () => {
   for (let x = 0; x < seats[0].length; x++) {
     for (let y = 0; y < seats.length; y++) {
       const pos = [x, y];
-      /* const numNeighbours = numAdjacentOccupied(pos); */
       const numNeighbours = neighboursFn(pos);
       if (isEmpty(pos) && numNeighbours === 0) {
         changes.push([pos, '#']);
@@ -112,29 +111,6 @@ const seatsVisibleFrom = ([x, y]) => {
   }, []);
 };
 
-const step2 = () => {
-  const changes = [];
-  for (let x = 0; x < seats[0].length; x++) {
-    for (let y = 0; y < seats.length; y++) {
-      const pos = [x, y];
-      /* const numNeighbours = numAdjacentOccupied(pos); */
-      const numNeighbours = seatsVisibleFrom(pos).filter(isOccupied).length;
-      if (isEmpty(pos) && numNeighbours === 0) {
-        changes.push([pos, '#']);
-      } else if (isOccupied(pos) && numNeighbours >= 5) {
-        changes.push([pos, 'L']);
-      }
-    }
-  }
-  changes.forEach(([pos, newValue]) => change(pos, newValue));
-  return changes.length;
-};
-
 run(step((pos) => seatsVisibleFrom(pos).filter(isOccupied).length, 5));
-
-/* steps = 0;
- * while ((c = step2()) !== 0) {
- *   steps++;
- * } */
 
 console.log('part 2', countOccupied());

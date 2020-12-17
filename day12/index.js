@@ -29,21 +29,6 @@ const followInstr = (cmds) => ([cmd, dist]) => cmds[cmd](dist);
 
 const run = (cmds, instrs) => instrs.forEach(followInstr(cmds));
 
-/* const run = (cmds, instrs) =>
- *   instrs.forEach((instr) => {
- *     followInstr(cmds)(instr);
- *     console.log(
- *       'instr',
- *       instr,
- *       'pos',
- *       pos,
- *       'dir',
- *       getDir(),
- *       'waypoint',
- *       waypoint
- *     );
- *   }); */
-
 run(cmds, instrs);
 
 const manhattan = () => Math.abs(pos[0]) + Math.abs(pos[1]);
